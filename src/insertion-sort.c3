@@ -6,7 +6,7 @@ macro void insertion_sort(arr) => is::insertion_sort(<$typeof(arr[0])>)(arr, 0, 
 module algos @test;
 import std::io;
 
-fault T_InsertionSort { MISMATCHED_ARRAYS }
+fault T_InsertionSort @private { MISMATCHED_ARRAYS }
 
 fn void! t_InsertionSort()
 {
@@ -18,19 +18,18 @@ fn void! t_InsertionSort()
     1, 1, 2, 2, 3, 5, 5, 6, 10, 15 
   };
 
-  io::printfn("\nInitial: %s", arr);
   insertion_sort(arr);
-  io::printfn("Got: %s", arr);
   
   for (usz i = 0; i < arr.len; ++i) {
     if (arr[i] != expected[i]) {
-      io::printfn("Expected: %s", expected);
       return T_InsertionSort.MISMATCHED_ARRAYS?;
     }
   }
 }
 
 module algos @benchmark;
+import std::core::runtime @public;
+import std::io;
 
 fn void b_InsertionSort()
 {

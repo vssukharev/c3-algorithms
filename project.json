@@ -1,9 +1,8 @@
 {
-  "langrev": "1",
   "warnings": [ "no-unused" ],
-  "version": "0.1.0",
   "sources": [ "src/**" ],
   "output": "build",
+  "benchfn": "algos::benchmark_runner",
   "targets": {
     "examples": {
       "type": "executable",
