@@ -1,6 +1,11 @@
 
 module algos;
+import std::sort;
 
+<*
+ @require sort::@is_sortable(arr)
+ @require types::is_equatable_type($typeof(arr[0]))
+*>
 macro void insertion_sort(arr) => is::insertion_sort(<$typeof(arr[0])>)(arr, 0, arr.len);
 
 module algos @test;
@@ -28,8 +33,6 @@ fn void! t_InsertionSort()
 }
 
 module algos @benchmark;
-import std::core::runtime @public;
-import std::io;
 
 fn void b_InsertionSort()
 {
@@ -40,9 +43,6 @@ fn void b_InsertionSort()
   insertion_sort(arr);
 }
 
-<*
- @require types::is_equatable_type(Type)
-*>
 module algos::is(<Type>);
 
 fn void insertion_sort(Type[] arr, isz p, isz q)

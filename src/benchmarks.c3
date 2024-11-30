@@ -1,6 +1,6 @@
-<*
- This file sets up becnhmarks
-*>
+/**
+ * This file sets up benchmarks
+**/
 
 module algos;
 
