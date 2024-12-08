@@ -1,9 +1,12 @@
 
+module algos;
+
+macro void merge_sort(arr) => msort::merge_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1);
+
 <*
  @require types::is_equatable_type(Type)
 *>
-module algos::ms(<Type>);
-import std::io;
+module algos::msort(<Type>);
 
 fn void merge_sort(Type[] arr, isz p, isz q)
 {
@@ -47,21 +50,5 @@ fn void merge(Type[] arr, isz p, isz mid, isz q)
     }
   };
 }
-
-module algos;
-
-macro void merge_sort(arr) =>
-  ms::merge_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1);
-
-module algos @test;
-
-fn void! t_MergeSort() => @test_sort(merge_sort);
-
-module algos @benchmark;
-import std::sort;
-
-fn void b_MergeSortSmall() => @bench_sort_small(merge_sort);
-fn void b_MergeSortBig() => @bench_sort_big(merge_sort);
-fn void b_MergeSortKill() => @bench_sort_killing(merge_sort);
 
 

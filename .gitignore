@@ -1,2 +1,8 @@
+
 build/**
 src/main.c3
+
+*.c
+*.out
+
+
