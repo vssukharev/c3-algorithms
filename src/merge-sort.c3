@@ -1,7 +1,7 @@
 
 module algos;
 
-macro void merge_sort(arr) => msort::merge_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1);
+macro void merge_sort(arr) => msort::merge_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1) @inline;
 
 <*
  @require types::is_equatable_type(Type)

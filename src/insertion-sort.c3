@@ -1,8 +1,8 @@
 
 module algos;
 
-macro void insertion_sort(arr) => isort::insertion_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1);
-macro void insertion_sort_rec(arr) => isort::insertion_sort_rec(<$typeof(arr[0])>)(arr, 0, arr.len - 1);
+macro void insertion_sort(arr) => isort::insertion_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1) @inline;
+macro void insertion_sort_rec(arr) => isort::insertion_sort_rec(<$typeof(arr[0])>)(arr, 0, arr.len - 1) @inline;
 
 <*
  @require types::is_equatable_type(Type)

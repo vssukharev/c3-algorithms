@@ -1,13 +1,18 @@
 
 module algos;
 
-macro usz! binary_search(arr, val) => bsearch::binary_search(<$typeof(val)>)(arr, val);
+macro usz! binary_search(arr, val) => bsearch::binary_search(<$typeof(val)>)(arr, val) @inline;
 
 <*
  @require types::is_equatable_type(Type)
 *>
 module algos::bsearch(<Type>);
 import std::io;
+
+fault BSearch
+{
+  ELEM_NOT_FOUND
+}
 
 fn usz! binary_search(Type[] arr, Type val)
 {
@@ -27,7 +32,7 @@ fn usz! binary_search(Type[] arr, Type val)
     }
   }
 
-  if (q < p || val != arr[p]) return AlgoFailure.ELEM_NOT_FOUND?; 
+  if (q < p || val != arr[p]) return BSearch.ELEM_NOT_FOUND?; 
 
   return p;
 }
