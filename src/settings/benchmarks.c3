@@ -21,5 +21,3 @@ fn void b_BinarySearchSmall() => binary_search(gen_slice_small_sorted(), 10)!!;
 fn void b_BinarySearchBig() => binary_search(gen_slice_big_sorted(), 10)!!;
 fn void b_BinarySearchKill() => binary_search(gen_slice_killing_sorted(), 10)!!;
 
-
-
