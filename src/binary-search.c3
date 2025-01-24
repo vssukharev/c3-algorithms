@@ -7,9 +7,8 @@ macro usz! binary_search(arr, val) => bsearch::binary_search(<$typeof(val)>)(arr
  @require types::is_equatable_type(Type)
 *>
 module algos::bsearch(<Type>);
-import std::io;
 
-fault BSearch
+fault BSearch @private
 {
   ELEM_NOT_FOUND
 }
