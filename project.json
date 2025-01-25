@@ -1,6 +1,7 @@
 {
   "warnings": [ "no-unused" ],
   "sources": [ "src/**" ],
+  "script-dir": "scripts",
   "output": "build",
   "benchfn": "algos::benchmark_runner",
   "targets": {
