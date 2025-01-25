@@ -1,14 +1,54 @@
 
 module algos;
 
-macro find_max_subarr(arr) => max_subarr_search::find_max_subarr(<$typefrom($typeof(arr).inner)>)(arr, 0, arr.len - 1).arr;
+<*
+ @require $typeof(arr).kindof == SLICE
+*>
+macro find_max_subarr(arr) => find_max_subarr_rec(arr);
+
+macro find_max_subarr_rec(arr) => max_subarr_search::find_max_subarr_rec(<$typefrom($typeof(arr).inner)>)(arr, 0, arr.len - 1).arr;
+macro find_max_subarr_bf(arr) => max_subarr_search::find_max_subarr_bf(<$typefrom($typeof(arr).inner)>)(arr);
 
 <*
  @require types::is_equatable_type(Type)
 *>
 module algos::max_subarr_search(<Type>);
 
-fn SumSubarr find_max_subarr(Type[] arr, usz low, usz high)
+fn Type[] find_max_subarr_bf(Type[] arr)
+{
+  Type[] max_arr;
+  Type max_sum = Type.min;
+
+  for (usz i = 0; i < arr.len; ++i)
+  {
+    Type sum = arr[i];
+
+    for (usz j = 0; j < i; ++j)
+    {
+      sum += arr[j];
+      if (sum > max_sum)
+      {
+        max_arr = arr[j..i];
+        max_sum = sum;
+      }
+    }
+
+    sum = arr[i];
+    for (usz j = i + 1; j < arr.len; ++j)
+    {
+      sum += arr[j];
+      if (sum > max_sum)
+      {
+        max_arr = arr[i..j];
+        max_sum = sum;
+      }
+    }
+  }
+
+  return max_arr;
+}
+
+fn SumSubarr find_max_subarr_rec(Type[] arr, usz low, usz high)
 {
   if (high == low) 
   {
@@ -19,8 +59,8 @@ fn SumSubarr find_max_subarr(Type[] arr, usz low, usz high)
   }
 
   usz mid = (high + low) / 2;
-  SumSubarr left_av = find_max_subarr(arr, low, mid);
-  SumSubarr right_av = find_max_subarr(arr, mid + 1, high);
+  SumSubarr left_av = $$FUNCTION(arr, low, mid);
+  SumSubarr right_av = $$FUNCTION(arr, mid + 1, high);
   SumSubarr cross_av = find_max_cross_subarr(arr, low, mid, high);
 
   if (left_av.sum >= right_av.sum && left_av.sum >= cross_av.sum)
