@@ -1,7 +1,7 @@
 
 module algos;
 
-macro find_max_subarr(arr) => max_subarr_search::find_max_subarr(<$typefrom($typeof(arr).inner)>)(arr).arr;
+macro find_max_subarr_recbf(arr) => max_subarr_search::find_max_subarr_recbf(<$typefrom($typeof(arr).inner)>)(arr).arr;
 macro find_max_subarr_rec(arr) => max_subarr_search::find_max_subarr_rec(<$typefrom($typeof(arr).inner)>)(arr).arr;
 macro find_max_subarr_bf(arr) => max_subarr_search::find_max_subarr_bf(<$typefrom($typeof(arr).inner)>)(arr).arr;
 macro find_max_subarr_lin(arr) => max_subarr_search::find_max_subarr_lin(<$typefrom($typeof(arr).inner)>)(arr).arr;
@@ -13,9 +13,9 @@ module algos::max_subarr_search(<Type>);
 
 fn SumSubarr find_max_subarr_lin(Type[] arr)
 {
+  SumSubarr max = { .arr = arr, .sum = Type.min };
   Type sum;
   usz start;
-  SumSubarr max = { .arr = arr, .sum = Type.min };
   
   for (usz i = 0; i < arr.len; ++i)
   {
@@ -37,15 +37,15 @@ fn SumSubarr find_max_subarr_lin(Type[] arr)
   return max;
 }
 
-fn SumSubarr find_max_subarr(Type[] arr)
+fn SumSubarr find_max_subarr_recbf(Type[] arr)
 {
   const BF_OVERHEAD = 11;
   if (arr.len <= BF_OVERHEAD) return find_max_subarr_bf(arr);
 
   usz mid = (arr.len - 1) / 2;
   
-  SumSubarr left_av = find_max_subarr(arr[..mid]);
-  SumSubarr right_av = find_max_subarr(arr[mid+1..]);
+  SumSubarr left_av = find_max_subarr_recbf(arr[..mid]);
+  SumSubarr right_av = find_max_subarr_recbf(arr[mid+1..]);
   SumSubarr cross_av = find_max_cross_subarr(arr, mid);
 
   if (left_av.sum >= right_av.sum && left_av.sum >= cross_av.sum)

@@ -21,7 +21,8 @@ module algos @benchmark;
 // fn void b_BinarySearchBig() => binary_search(gen_slice_big_sorted(), 10)!!;
 // fn void b_BinarySearchKill() => binary_search(gen_slice_killing_sorted(), 10)!!;
 
-fn void b_FindMaxSubarr() => find_max_subarr(@gen_slice());
+fn void b_FindMaxSubarrRecbf() => find_max_subarr_recbf(@gen_slice());
+fn void b_FindMaxSubarrLin() => find_max_subarr_lin(@gen_slice());
 fn void b_FindMaxSubarrRec() => find_max_subarr_rec(@gen_slice());
 fn void b_FindMaxSubarrBf() => find_max_subarr_bf(@gen_slice());
 
