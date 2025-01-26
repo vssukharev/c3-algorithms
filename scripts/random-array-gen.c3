@@ -19,7 +19,7 @@ fn int main(String[] args)
     io::printf("macro int[] @gen_slice_%s() => { ", n);
     for (ulong i = 0; i < n; ++i)
     {
-      io::printf("%s, ", rand(1000));
+      io::printf("%s, ", rand(100) - 50);
     }
     io::printf(" };\n");
   }

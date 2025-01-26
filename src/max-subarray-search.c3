@@ -4,11 +4,38 @@ module algos;
 macro find_max_subarr(arr) => max_subarr_search::find_max_subarr(<$typefrom($typeof(arr).inner)>)(arr).arr;
 macro find_max_subarr_rec(arr) => max_subarr_search::find_max_subarr_rec(<$typefrom($typeof(arr).inner)>)(arr).arr;
 macro find_max_subarr_bf(arr) => max_subarr_search::find_max_subarr_bf(<$typefrom($typeof(arr).inner)>)(arr).arr;
+macro find_max_subarr_lin(arr) => max_subarr_search::find_max_subarr_lin(<$typefrom($typeof(arr).inner)>)(arr).arr;
 
 <*
  @require types::is_equatable_type(Type)
 *>
 module algos::max_subarr_search(<Type>);
+
+fn SumSubarr find_max_subarr_lin(Type[] arr)
+{
+  Type sum;
+  usz start;
+  SumSubarr max = { .arr = arr, .sum = Type.min };
+  
+  for (usz i = 0; i < arr.len; ++i)
+  {
+    sum += arr[i];
+    if (sum < 0)
+    {
+      sum = 0;
+      start = i + 1;
+    }
+    else if (max.sum < sum)
+    {
+      max = { 
+        .sum = sum,
+        .arr = arr[start..i] 
+      };
+    }
+  }
+
+  return max;
+}
 
 fn SumSubarr find_max_subarr(Type[] arr)
 {
@@ -41,9 +68,8 @@ fn SumSubarr find_max_subarr_bf(Type[] arr)
 
   for (usz i = 0; i < arr.len; ++i)
   {
-    Type sum = arr[i];
-
-    for (usz j = 0; j < i; ++j)
+    Type sum;
+    for (isz j = i; j >= 0; --j)
     {
       sum += arr[j];
       if (sum > max.sum)
@@ -53,8 +79,8 @@ fn SumSubarr find_max_subarr_bf(Type[] arr)
       }
     }
 
-    sum = arr[i];
-    for (usz j = i + 1; j < arr.len; ++j)
+    sum = {};
+    for (usz j = i; j < arr.len; ++j)
     {
       sum += arr[j];
       if (sum > max.sum)
@@ -72,7 +98,7 @@ fn SumSubarr find_max_subarr_rec(Type[] arr)
 {
   if (arr.len == 1) 
   {
-    return { 
+    return {
       .sum = arr[0], 
       .arr = arr, 
     };
@@ -106,44 +132,36 @@ struct SumSubarr @private
 
 fn SumSubarr find_max_cross_subarr(Type[] arr, usz mid) @private
 {
-  Type sum;
-  usz max_left;
-  usz max_right;
+  Type max_left_sum = Type.min;
+  Type max_right_sum = Type.min;
+  usz max_left_i;
+  usz max_right_i;
 
-  Type left_sum = Type.min;
+  Type sum;
   for (isz i = mid; i >= 0; --i)
   {
     sum += arr[i];
-    if (sum > left_sum)
+    if (max_left_sum < sum)
     {
-      left_sum = sum;
-      max_left = i;
-    }
-    else
-    {
-      break;
+      max_left_sum = sum;
+      max_left_i = i;
     }
   }
 
   sum = {};
-  Type right_sum = Type.min;
   for (usz i = mid + 1; i < arr.len; ++i)
   {
     sum += arr[i];
-    if (sum > right_sum)
+    if (max_right_sum < sum)
     {
-      right_sum = sum;
-      max_right = i;
-    }
-    else
-    {
-      break;
+      max_right_sum = sum;
+      max_right_i = i;
     }
   }
 
   return {
-    .sum = left_sum + right_sum,
-    .arr = arr[max_left..max_right],
+    .sum = max_left_sum + max_right_sum,
+    .arr = arr[max_left_i..max_right_i],
   };
 }
 
