@@ -1,12 +1,12 @@
 
 module algos;
 
-macro void merge_sort(arr) => msort::merge_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1) @inline;
+macro void merge_sort(arr) => array::merge_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1) @inline;
 
 <*
  @require types::is_equatable_type(Type)
 *>
-module algos::msort(<Type>);
+module algos::array(<Type>);
 
 fn void merge_sort(Type[] arr, isz p, isz q)
 {

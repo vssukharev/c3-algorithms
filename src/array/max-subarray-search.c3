@@ -1,15 +1,15 @@
 
 module algos;
 
-macro find_max_subarr_recbf(arr) => max_subarr_search::find_max_subarr_recbf(<$typefrom($typeof(arr).inner)>)(arr).arr;
-macro find_max_subarr_rec(arr) => max_subarr_search::find_max_subarr_rec(<$typefrom($typeof(arr).inner)>)(arr).arr;
-macro find_max_subarr_bf(arr) => max_subarr_search::find_max_subarr_bf(<$typefrom($typeof(arr).inner)>)(arr).arr;
-macro find_max_subarr_lin(arr) => max_subarr_search::find_max_subarr_lin(<$typefrom($typeof(arr).inner)>)(arr).arr;
+macro find_max_subarr_recbf(arr) => array::find_max_subarr_recbf(<$typefrom($typeof(arr).inner)>)(arr).arr;
+macro find_max_subarr_rec(arr) => array::find_max_subarr_rec(<$typefrom($typeof(arr).inner)>)(arr).arr;
+macro find_max_subarr_bf(arr) => array::find_max_subarr_bf(<$typefrom($typeof(arr).inner)>)(arr).arr;
+macro find_max_subarr_lin(arr) => array::find_max_subarr_lin(<$typefrom($typeof(arr).inner)>)(arr).arr;
 
 <*
  @require types::is_equatable_type(Type)
 *>
-module algos::max_subarr_search(<Type>);
+module algos::array(<Type>);
 
 fn SumSubarr find_max_subarr_lin(Type[] arr)
 {

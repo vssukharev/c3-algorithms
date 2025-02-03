@@ -1,12 +1,12 @@
 
 module algos;
 
-macro usz! linear_search(arr, val) => lsearch::linear_search(<$typeof(val)>)(arr, val) @inline;
+macro usz! linear_search(arr, val) => array::linear_search(<$typeof(val)>)(arr, val) @inline;
 
 <*
  @require types::is_equatable_type(Type)
 *>
-module algos::lsearch(<Type>);
+module algos::array(<Type>);
 
 fault LSearch
 {

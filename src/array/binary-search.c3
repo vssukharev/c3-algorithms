@@ -1,12 +1,12 @@
 
 module algos;
 
-macro usz! binary_search(arr, val) => bsearch::binary_search(<$typeof(val)>)(arr, val) @inline;
+macro usz! binary_search(arr, val) => array::binary_search(<$typeof(val)>)(arr, val) @inline;
 
 <*
  @require types::is_equatable_type(Type)
 *>
-module algos::bsearch(<Type>);
+module algos::array(<Type>);
 
 fault BSearch @private
 {

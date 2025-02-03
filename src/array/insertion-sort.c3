@@ -1,13 +1,13 @@
 
 module algos;
 
-macro void insertion_sort(arr) => isort::insertion_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1) @inline;
-macro void insertion_sort_rec(arr) => isort::insertion_sort_rec(<$typeof(arr[0])>)(arr, 0, arr.len - 1) @inline;
+macro void insertion_sort(arr) => array::insertion_sort(<$typeof(arr[0])>)(arr, 0, arr.len - 1) @inline;
+macro void insertion_sort_rec(arr) => array::insertion_sort_rec(<$typeof(arr[0])>)(arr, 0, arr.len - 1) @inline;
 
 <*
  @require types::is_equatable_type(Type)
 *>
-module algos::isort(<Type>);
+module algos::array(<Type>);
 
 fn void insertion_sort(Type[] arr, isz p, isz q)
 {
